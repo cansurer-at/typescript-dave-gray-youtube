@@ -1,20 +1,32 @@
 "use strict";
-// Type Assertions(asorsin) & Type Casting (same thing has 2 name)
-// convert to more or less specific
-let a = "hello";
-let b = a; // less specific
-let c = a; // more spe
-let d = "word";
-let e = "word";
-const addOrConcat = (a, b, c) => {
-    if (c === "add")
-        return a + b;
-    return "" + a + b;
-};
-let myVal = addOrConcat(2, 2, "concat");
-// be careful! TS sees no problem- but string is returned
-let nextVal = addOrConcat(2, 2, "concat");
-// the DOM 
-const img = document.getElementById("img");
-const myImg = document.getElementById("#img");
-const nextImg = document.getElementById("#img");
+class Coder {
+    constructor(name, music, age, lang = "Typescript") {
+        this.name = name;
+        this.music = music;
+        this.age = age;
+        this.lang = lang;
+        this.name = name;
+        this.music = music;
+        this.age = age;
+        this.lang = lang;
+    }
+    getAge() {
+        return `Hello, I am ${this.age}`;
+    }
+}
+const Dave = new Coder("Dave", "Rock", 42);
+console.log(Dave.getAge());
+//console.log(Dave.age);
+// console.log(Dave.lang);
+class WebDev extends Coder {
+    constructor(computer, name, music, age) {
+        super(name, music, age);
+        this.computer = computer;
+        this.computer = computer;
+    }
+    getLang() {
+        return ` I write ${this.lang}`;
+    }
+}
+const Sara = new WebDev("Mac", "Sara", "Lofi", 25);
+console.log(Sara.getLang());

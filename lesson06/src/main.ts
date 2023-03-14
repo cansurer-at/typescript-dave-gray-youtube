@@ -1,33 +1,44 @@
-// Type Assertions(asorsin) & Type Casting (same thing has 2 name)
+class Coder {
+  secondLang!: string;
 
-type One = string;
-type Two = string | number;
-type Three = "hello";
+  constructor(
+    public readonly name: string,
+    readonly music: string,
+    private age: number,
+    protected lang: string = "Typescript"
+  ) {
+    this.name = name;
+    this.music = music;
+    this.age = age;
+    this.lang = lang;
+  }
 
-// convert to more or less specific
+  public getAge() {
+    return `Hello, I am ${this.age}`;
+  }
+}
 
-let a: One = "hello";
-let b = a as Two; // less specific
-let c = a as Three; // more spe
+const Dave = new Coder("Dave", "Rock", 42);
+console.log(Dave.getAge());
+//console.log(Dave.age);
+// console.log(Dave.lang);
 
-let d = <One>"word";
-let e = <string | number>"word";
+class WebDev extends Coder {
+  constructor(
+    public computer: string,
+    name: string,
+    music: string,
+    age: number
+  ) {
+    super(name, music, age);
+    this.computer = computer;
+  }
 
-const addOrConcat = (
-  a: number,
-  b: number,
-  c: "add" | "concat"
-): number | string => {
-  if (c === "add") return a + b;
-  return "" + a + b;
-};
+  public getLang() {
+    return ` I write ${this.lang}`;
+  }
+}
 
-let myVal: string = addOrConcat(2, 2, "concat") as string;
+const Sara = new WebDev("Mac", "Sara", "Lofi", 25);
 
-// be careful! TS sees no problem- but string is returned
-let nextVal: number = addOrConcat(2, 2, "concat") as number;
-
-// the DOM 
-const img = document.getElementById("img") as HTMLImageElement;
-const myImg = document.getElementById("#img") as HTMLImageElement;
-const nextImg = <HTMLImageElement>document.getElementById("#img");
+console.log(Sara.getLang());
